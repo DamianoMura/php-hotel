@@ -64,7 +64,9 @@ $filters = ["parking" => false, "vote" => false];
 
 
             <input type="checkbox" class="btn-check" id="vote" autocomplete="off">
-            <label class="btn btn-outline-primary" for="vote">vote > 3</label>
+            <label class="btn btn-outline-primary" for="vote"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>+</label>
+            <input type="checkbox" class="btn-check" id="center" autocomplete="off">
+            <label class="btn btn-outline-primary" for="center">DownTown</label>
 
           </div>
         </form>
@@ -87,7 +89,11 @@ $filters = ["parking" => false, "vote" => false];
                 <td><?php echo $hotel['name'] ?></td>
                 <td><?php echo $hotel['description'] ?></td>
                 <td><?php echo $hotel['parking'] ? 'Yes' : 'No' ?></td>
-                <td><?php echo $hotel['vote'] ?></td>
+                <td><?php
+                    for ($x = 0; $x < $hotel['vote']; $x++) {
+                      echo "<i class='fa-solid fa-star'></i>";
+                    }
+                    ?></td>
                 <td><?php echo $hotel['distance_to_center'] ?> km</td>
               </tr>
             <?php
