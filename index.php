@@ -97,11 +97,11 @@ foreach ($hotels as $hotel) {
               </label>
             </div>
             <div>
-              <label for="vote" class="form-label d-flex"><?php
-                                                          for ($i = 1; $i <= $vote; $i++) {
-                                                            echo " <br> <i class='fa-solid fa-star'></i>";
-                                                          }
-                                                          ?></label>
+              <label for="vote" class="form-label d-flex justify-content-center align-items-center">Vote : &nbsp;<?php
+                                                                                                                  for ($i = 1; $i <= $vote; $i++) {
+                                                                                                                    echo " <br> <i class='fa-solid fa-star'></i>";
+                                                                                                                  }
+                                                                                                                  ?></label>
               <input type="range" class="form-range" min="1" max="5" id="vote" value=<?php echo $vote ?> name="vote">
 
 
