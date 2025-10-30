@@ -38,8 +38,21 @@ $hotels = [
   ],
 
 ];
+$filtered_hotels = [];
+//lets see what parameters we got from GET
+// foreach ($_GET as $key => $value) {
+//   echo "$key : $value<br>";
+// }
+//filters loaded at runtime from GET params
+$parking = false;
+$vote = 0;
+if (isset($_GET['parking'])) {
+  $parking = $_GET['parking'] === 'true' ? true : false;
+}
+if (isset($_GET['vote'])) {
+  $vote = $_GET['vote'];
+}
 
-$filters = ["parking" => false, "vote" => false];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,23 +68,36 @@ $filters = ["parking" => false, "vote" => false];
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center p-3">
-        <h1>Hotel list</h1>
-        <form action="./index.php" method="get">
-          <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-            <input type="checkbox" class="btn-check" id="parking" autocomplete="off">
-            <label class="btn btn-outline-primary" for="parking">Parking</label>
-
-
-            <input type="checkbox" class="btn-check" id="vote" autocomplete="off">
-            <label class="btn btn-outline-primary" for="vote"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>+</label>
-            <input type="checkbox" class="btn-check" id="center" autocomplete="off">
-            <label class="btn btn-outline-primary" for="center">DownTown</label>
-
+      <div class="col-12 p-3">
+        <h1 class=" text-center">Hotel list</h1>
+        <form action=" ./index.php" method="get">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="parking" value="true" name="parking" <?php if ($parking) echo 'checked' ?>>
+                  <label class="form-check-label" for="parking">
+                    Private Parking
+                  </label>
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="vote" class="form-label">Vote</label>
+                <input type="range" class="form-range" min="1" max="5" id="vote" value=<?php echo $vote ?> name="vote">
+              </div>
+              <div class="col-4">
+                <button class="btn text-center" type="submit">set filters</button>
+              </div>
+            </div>
           </div>
+
+
+
+
         </form>
+
       </div>
-      <div class="col-12">
+      <div class=" col-12">
         <table class="table">
           <thead>
             <tr>
@@ -83,7 +109,7 @@ $filters = ["parking" => false, "vote" => false];
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($hotels as $hotel) {
+            <?php foreach ($filtered_hotels as $hotel) {
             ?>
               <tr>
                 <td><?php echo $hotel['name'] ?></td>
@@ -103,8 +129,20 @@ $filters = ["parking" => false, "vote" => false];
       </div>
     </div>
 
+    <script>
+      const handleChange = (e) => {
+        e.preventDefault();
+
+
+      }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+  </div>
+
+
+
 </body>
 
 </html>
