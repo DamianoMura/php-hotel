@@ -45,7 +45,7 @@ $filtered_hotels = [];
 // }
 //filters loaded at runtime from GET params
 $parking = false;
-$vote = 0;
+$vote = 1;
 if (isset($_GET['parking'])) {
   $parking = $_GET['parking'] === 'true' ? true : false;
 }
@@ -87,25 +87,26 @@ foreach ($hotels as $hotel) {
     <div class="row">
       <div class="col-12 p-3">
         <h1 class=" text-center">Hotel list</h1>
-        <form action=" ./index.php" method="get">
-          <div class="container">
-            <div class="row">
-              <div class="col-4">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="parking" value="true" name="parking" <?php if ($parking) echo 'checked' ?>>
-                  <label class="form-check-label" for="parking">
-                    Private Parking
-                  </label>
-                </div>
-              </div>
-              <div class="col-4">
-                <label for="vote" class="form-label ">Vote</label>
-                <input type="range" class="form-range" min="1" max="5" id="vote" value=<?php echo $vote ?> name="vote">
-              </div>
-              <div class="col-4">
-                <button class="btn btn-primary text-center" type="submit">set filters</button>
-              </div>
+        <form action=" ./index.php" method="get" class="mb-4 p-3 border border-2 rounded-3">
+          <div class="container d-flex justify-content-between align-items-center">
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="parking" value="true" name="parking" <?php if ($parking) echo 'checked' ?>>
+              <label class="form-check-label" for="parking">
+                Private Parking
+              </label>
             </div>
+            <div>
+              <label for="vote" class="form-label d-flex"><?php
+                                                          for ($i = 1; $i <= $vote; $i++) {
+                                                            echo " <br> <i class='fa-solid fa-star'></i>";
+                                                          }
+                                                          ?></label>
+              <input type="range" class="form-range" min="1" max="5" id="vote" value=<?php echo $vote ?> name="vote">
+
+
+            </div>
+            <button class="btn btn-primary text-center" type="submit">set filters</button>
           </div>
 
 
