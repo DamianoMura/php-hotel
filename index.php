@@ -53,6 +53,23 @@ if (isset($_GET['vote'])) {
   $vote = $_GET['vote'];
 }
 
+//filtering logic
+foreach ($hotels as $hotel) {
+  //check parking filter
+  if ($parking) {
+    if ($hotel['parking'] != $parking) {
+      continue; //skip this hotel
+    }
+  }
+  //check vote filter
+  if ($vote > 0) {
+    if ($hotel['vote'] < $vote) {
+      continue; //skip this hotel
+    }
+  }
+  //if we are here means the hotel passed all filters
+  $filtered_hotels[] = $hotel;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,11 +99,11 @@ if (isset($_GET['vote'])) {
                 </div>
               </div>
               <div class="col-4">
-                <label for="vote" class="form-label">Vote</label>
+                <label for="vote" class="form-label ">Vote</label>
                 <input type="range" class="form-range" min="1" max="5" id="vote" value=<?php echo $vote ?> name="vote">
               </div>
               <div class="col-4">
-                <button class="btn text-center" type="submit">set filters</button>
+                <button class="btn btn-primary text-center" type="submit">set filters</button>
               </div>
             </div>
           </div>
